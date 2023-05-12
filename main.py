@@ -35,6 +35,10 @@ def index():
 def stub():
     return render_template("stub.html")
 
+@app.route('/movies/')
+def movies():
+    return render_template("Movies.html")
+
 @app.before_first_request
 def activate_job():
     initJokes()
