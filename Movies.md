@@ -39,18 +39,8 @@ custom-field input {
             <button id="btn">Click to Add</button>
         </custom-field>
     </form>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-    <div class="center">
-                    <h2 class="card-title">Show Movies</h2>
-                    <p id="display" onclick="showMovies()">Click me to see your movies.</p>
-    </div>
     <script>
-        function bigman() {
-            newTitle.style.color += "blue"
-        }   
-        // function to store movies and commentary
-        let movies = [];
+        let movies = [{id: 1, ftitle: 'Joker', commentary: 'I\'m the joker baby'}];
         // example {id:1592304983049, title: 'Avengers: Endgame', commentary: 'good action scenes.'}
         const addMovie = (ev)=>{
             ev.preventDefault();  //stops the form submitting automatically
@@ -64,38 +54,20 @@ custom-field input {
             console.warn('added' , {movies} ); // displays array in the console
             //saving to localStorage
             localStorage.setItem('MyMovieList', JSON.stringify(movies) );
+            Addmovie()
         }
         document.addEventListener('DOMContentLoaded', ()=>{
             document.getElementById('btn').addEventListener('click', addMovie);
         });
-        function showMovies() {
-            if (movies.length === 0){
-                const newDiv = document.createElement("H1");
-                const newContent = document.createTextNode('\xa0\xa0' + "There Are No Movies to Display");
-                newDiv.appendChild(newContent);
-                const currentDiv = document.getElementById("H1");
-                document.body.insertBefore(newDiv, currentDiv);
-            }
-            else{
-                const newDiv = document.createElement("H1");
-                const newContent = document.createTextNode('\xa0\xa0' + "Displayed below are your movies and commentary");
-                newDiv.appendChild(newContent);
-                const currentDiv = document.getElementById("H1");
-                document.body.insertBefore(newDiv, currentDiv);
-                // accesses each movie's title and displays each one in a new div element
-                for (var i=0;i<movies.length;i+=1) {
-                   console.log(movies[i].ftitle); // shows each movie displayed in console
-                   const newDiv = document.createElement("div");
-                   const newContent = document.createTextNode("Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary);
-                   newDiv.appendChild(newContent);
-                   const currentDiv = document.getElementById("div1");
-                    document.body.insertBefore(newDiv, currentDiv);
-                    }
-            }
+        function Addmovie() {
+            var movieindex = movies.length - 1;
+            console.log(movies[movieindex].ftitle);
+            const newDiv = document.createElement("div");
+            newDiv.innerText = "Movie: " + movies[movieindex].ftitle + "\nComments: " + movies[movieindex].commentary
+            document.body.appendChild(newDiv)
         }
         const newTitle = document.createElement("H1");
-        const titleContent = document.createTextNode('\xa0\xa0' + "There Are No Movies to Display");
-        newTitle.innerText = '\xa0\xa0' + "There Are No Movies to Display"
+        newTitle.innerText = '\xa0\xa0' + "Displayed below are your movies and commentary"
         document.body.appendChild(newTitle)
         // break for readability
         for (var i=0;i<movies.length;i+=1) {
