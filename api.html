@@ -1,0 +1,94 @@
+<body>
+    <p>hello</p>
+</body>
+<script>
+    const url = "https://cgato.duckdns.org/api/pisses" //replace with api link
+    const create_fetch = url + '/create';
+    const read_fetch = url + '/';
+    //
+    function read_movie() {
+        // prepare fetch options
+        const read_options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        // fetch the data from API
+        fetch(read_fetch, read_options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+                if (response.status !== 200) {
+                    const errorMsg = 'Database read error: ' + response.status;
+                    console.log(errorMsg);
+                    newDiv.innerHTML = errorMsg;
+                    document.body.appendChild(newDiv)
+                    return;
+                }
+            // valid response will have json data
+                response.json().then(data => {
+                    console.log(data);
+                    //data.sort(function(a, b){return a.time - b.time})
+                    //console.log(data);
+                    for (let row in data) {
+                        console.log(data[row]);
+                        add_row(data[row]);
+                    }
+                })
+            })
+        // catch fetch errors (ie ACCESS to server blocked)
+            .catch(err => {
+                console.error(err);
+                const newDiv = document.createElement("div");
+                newDiv.innerHTML = err;
+                document.body.appendChild(newDiv)
+            });
+    }
+    //
+    function add_row(data) {
+        const newDiv = document.createElement("div");
+        // obtain data that is specific to the API
+        newDiv.innerHTML = "Movie: " + data.ftitle + "\nComments: " + data.commentary
+        // add HTML to container
+        document.body.appendChild(newDiv)
+    }
+    //
+    function create_movie(){
+        const body = {
+            id: Date.now(),
+            ftitle: document.getElementById('ftitle').value,
+            commentary: document.getElementById("time").value
+        };
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                "content-type": "application/json",
+                'Authorization': 'Bearer my-token',
+            },
+        };
+        // URL for Create API
+        // Fetch API call to the database to create a new user
+        fetch(create_fetch, requestOptions)
+            .then(response => {
+            // trap error response from Web API
+                if (response.status !== 200) {
+                    const errorMsg = 'Database create error: ' + response.status;
+                    console.log(errorMsg);
+                    newDiv.innerHTML = errorMsg;
+                    document.body.appendChild(newDiv)
+                    return;
+                }
+            // response contains valid result
+                response.json().then(data => {
+                    console.log(data);
+                    //add a table row for the new/created userid
+                    add_row(data);
+                })
+            })
+    }
+</script>
