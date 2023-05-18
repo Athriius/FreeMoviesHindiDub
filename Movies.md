@@ -46,6 +46,9 @@ custom-field input {
                     <p id="display" onclick="showMovies()">Click me to see your movies.</p>
     </div>
     <script>
+        function bigman() {
+            newTitle.style.color += "blue"
+        }   
         // function to store movies and commentary
         let movies = [];
         // example {id:1592304983049, title: 'Avengers: Endgame', commentary: 'good action scenes.'}
@@ -83,12 +86,23 @@ custom-field input {
                 for (var i=0;i<movies.length;i+=1) {
                    console.log(movies[i].ftitle); // shows each movie displayed in console
                    const newDiv = document.createElement("div");
-                   const newContent = document.createTextNode("Movie: " + movies[i].ftitle + ", Comments: " + movies[i].commentary);
+                   const newContent = document.createTextNode("Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary);
                    newDiv.appendChild(newContent);
                    const currentDiv = document.getElementById("div1");
                     document.body.insertBefore(newDiv, currentDiv);
                     }
             }
+        }
+        const newTitle = document.createElement("H1");
+        const titleContent = document.createTextNode('\xa0\xa0' + "There Are No Movies to Display");
+        newTitle.innerText = '\xa0\xa0' + "There Are No Movies to Display"
+        document.body.appendChild(newTitle)
+        // break for readability
+        for (var i=0;i<movies.length;i+=1) {
+            console.log(movies[i].ftitle); // shows each movie displayed in console
+            const newDiv = document.createElement("div");
+            newDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
+            document.body.appendChild(newDiv)
         }
     </script>
 </body>
