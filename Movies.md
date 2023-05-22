@@ -38,6 +38,7 @@ custom-field input {
         <custom-field class="formBox">
             <button id="btn">Click to Add</button>
         </custom-field>
+        <button onclick="logSort()">Sort Movies By Title</button>
     </form>
     <script>
         let movies = [{id: 1, ftitle: 'Joker', commentary: 'I\'m the joker baby'}];
@@ -76,5 +77,26 @@ custom-field input {
             newDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
             document.body.appendChild(newDiv)
         }
+        function sortMovies(array, key) {
+                event.preventDefault();
+                return array.sort((a, b) => {
+                  const movieA = a[key].toUpperCase();
+                  const movieB = b[key].toUpperCase();
+                  if (movieA < movieB) {
+                    return -1;
+                  }
+                 if (movieA > movieB) {
+                   return 1;
+                  }
+                  return 0;
+                });
+              }      
+              function logSort() {
+                event.preventDefault();    
+                // Sort the array of dictionaries by the 'ftitle' 
+                var sortedData = sortMovies(movies, 'ftitle');        
+                // Display the sorted data in the console
+                console.log(sortedData);
+              }   
     </script>
 </body>

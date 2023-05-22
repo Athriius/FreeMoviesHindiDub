@@ -6,5 +6,5 @@
 
 * Like and dislike posts in order to help determine which movies are best
 
-* View the reasons behind different movie opinions
+* View the reasons behind different movie opinions.
 
