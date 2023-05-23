@@ -23,6 +23,20 @@ custom-field input {
   border: 3px solid  #FFD133;
   padding: 10px;
 }
+.sortTitle {
+  margin: auto;
+  color: white;
+  border: 3px solid  #FFC133;
+  padding: 12px;
+}
+.movieBody {
+  margin: auto;
+  color: white;
+  border: 3px solid  #FFC133;
+  padding: 12px;
+  width: 1000px;
+  background: #f2f2f2;
+}
 </style>
     <form>
         <custom-field class="formBox">
@@ -39,6 +53,7 @@ custom-field input {
             <button id="btn">Click to Add</button>
         </custom-field>
         <button onclick="logSort()">Sort Movies By Title</button>
+        <button onclick="changeStyle()">Hide Movies</button>
     </form>
     <script>
         let movies = [{id: 1, ftitle: 'Joker', commentary: 'I\'m the joker baby'}];
@@ -65,17 +80,21 @@ custom-field input {
             console.log(movies[movieindex].ftitle);
             const newDiv = document.createElement("div");
             newDiv.innerText = "Movie: " + movies[movieindex].ftitle + "\nComments: " + movies[movieindex].commentary
-            document.body.appendChild(newDiv)
+            bodyDiv.appendChild(newDiv)
         }
         const newTitle = document.createElement("H1");
         newTitle.innerText = '\xa0\xa0' + "Displayed below are your movies and commentary"
         document.body.appendChild(newTitle)
-        // break for readability
+        // Creating Body
+        var bodyDiv = document.createElement("div");
+        document.body.appendChild(bodyDiv);
+        bodyDiv.classList.add('movieBody');
+        //Displaying Movies
         for (var i=0;i<movies.length;i+=1) {
             console.log(movies[i].ftitle); // shows each movie displayed in console
             const newDiv = document.createElement("div");
             newDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
-            document.body.appendChild(newDiv)
+            bodyDiv.appendChild(newDiv)
         }
         function sortMovies(array, key) {
                 event.preventDefault();
@@ -96,7 +115,21 @@ custom-field input {
                 // Sort the array of dictionaries by the 'ftitle' 
                 var sortedData = sortMovies(movies, 'ftitle');        
                 // Display the sorted data in the console
-                console.log(sortedData);
-              }   
+                console.log(sortedData);  
+                const titleDiv = document.createElement("div");
+                    titleDiv.classList.add('sortTitle'); 
+                    titleDiv.innerText = "Sorted Movies Displayed Below:"
+                    document.body.appendChild(titleDiv);
+                for (var i=0;i<movies.length;i+=1) {
+                     console.log(movies[i].ftitle); // shows each movie displayed in console
+                    const sortDiv = document.createElement("div");
+                    sortDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
+                    document.body.appendChild(sortDiv)
+                 }
+                }
+        function changeStyle() {
+          event.preventDefault();
+          document.getElementById("bodyDiv").style.display = 'none';
+}
     </script>
 </body>
