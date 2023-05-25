@@ -38,98 +38,190 @@ custom-field input {
   background: #f2f2f2;
 }
 </style>
-    <form>
-        <custom-field class="formBox">
-            <label for="ftitle">Movie</label>
-            <input type="text" id="ftitle" placeholder="Movie Title"/>
-        </custom-field>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-        <custom-field class="formBox">
-            <label for="commentary">Commentary</label>
-            <input type="text" id="commentary" placeholder="Commentary"/>
-        </custom-field>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-        <custom-field class="formBox">
-            <button id="btn">Click to Add</button>
-        </custom-field>
-        <button onclick="logSort()">Sort Movies By Title</button>
-        <button onclick="changeStyle()">Hide Movies</button>
-    </form>
-    <script>
-        let movies = [{id: 1, ftitle: 'Joker', commentary: 'I\'m the joker baby'}];
-        // example {id:1592304983049, title: 'Avengers: Endgame', commentary: 'good action scenes.'}
-        const addMovie = (ev)=>{
-            ev.preventDefault();  //stops the form submitting automatically
-            let movie = {
-                id: Date.now(),
-                ftitle: document.getElementById('ftitle').value,
-                commentary: document.getElementById('commentary').value
+<form>
+    <custom-field class="formBox">
+        <label for="ftitle">Movie</label>
+        <input type="text" id="ftitle" placeholder="Movie Title"/>
+    </custom-field>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <custom-field class="formBox">
+        <label for="commentary">Commentary</label>
+        <input type="text" id="commentary" placeholder="Commentary"/>
+    </custom-field>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <custom-field class="formBox">
+        <button id="btn">Click to Add</button>
+    </custom-field>
+    <button onclick="logSort()">Sort Movies By Title</button>
+    <button onclick="changeStyle()">Hide Movies</button>
+</form>
+<script>
+    let movies = [];
+    // example {id:1592304983049, title: 'Avengers: Endgame', commentary: 'good action scenes.'}
+    const addMovie = (ev)=>{
+        ev.preventDefault();  //stops the form submitting automatically
+        let movie = {
+            id: Date.now(),
+            ftitle: document.getElementById('ftitle').value,
+            commentary: document.getElementById('commentary').value
+        }
+        movies.push(movie);
+        document.forms[0].reset(); // to clear the form for the next entries
+        console.warn('added' , {movies} ); // displays array in the console
+        //saving to localStorage
+        localStorage.setItem('MyMovieList', JSON.stringify(movies) );
+        Addmovie()
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+        document.getElementById('btn').addEventListener('click', addMovie);
+    });
+    function Addmovie() {
+        var movieindex = movies.length - 1;
+        console.log(movies[movieindex].ftitle);
+        const newDiv = document.createElement("div");
+        newDiv.innerText = "Movie: " + movies[movieindex].ftitle + "\nComments: " + movies[movieindex].commentary
+        bodyDiv.appendChild(newDiv)
+    }
+    const newTitle = document.createElement("H1");
+    newTitle.innerText = '\xa0\xa0' + "Displayed below are your movies and commentary"
+    document.body.appendChild(newTitle)
+    // Creating Body
+    var bodyDiv = document.createElement("div");
+    document.body.appendChild(bodyDiv);
+    bodyDiv.classList.add('movieBody');
+    //Displaying Movies
+    for (var i=0;i<movies.length;i+=1) {
+        console.log(movies[i].ftitle); // shows each movie displayed in console
+        const newDiv = document.createElement("div");
+        newDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
+        bodyDiv.appendChild(newDiv)
+    }
+    function sortMovies(array, key) {
+            event.preventDefault();
+            return array.sort((a, b) => {
+              const movieA = a[key].toUpperCase();
+              const movieB = b[key].toUpperCase();
+              if (movieA < movieB) {
+                return -1;
+              }
+              if (movieA > movieB) {
+                return 1;
+              }
+              return 0;
+            });
+          }      
+          function logSort() {
+            event.preventDefault();    
+            // Sort the array of dictionaries by the 'ftitle' 
+            var sortedData = sortMovies(movies, 'ftitle');        
+            // Display the sorted data in the console
+            console.log(sortedData);  
+            const titleDiv = document.createElement("div");
+                titleDiv.classList.add('sortTitle'); 
+                titleDiv.innerText = "Sorted Movies Displayed Below:"
+                document.body.appendChild(titleDiv);
+            for (var i=0;i<movies.length;i+=1) {
+                  console.log(movies[i].ftitle); // shows each movie displayed in console
+                const sortDiv = document.createElement("div");
+                sortDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
+                document.body.appendChild(sortDiv)
+              }
             }
-           movies.push(movie);
-            document.forms[0].reset(); // to clear the form for the next entries
-            console.warn('added' , {movies} ); // displays array in the console
-            //saving to localStorage
-            localStorage.setItem('MyMovieList', JSON.stringify(movies) );
-            Addmovie()
-        }
-        document.addEventListener('DOMContentLoaded', ()=>{
-            document.getElementById('btn').addEventListener('click', addMovie);
-        });
-        function Addmovie() {
-            var movieindex = movies.length - 1;
-            console.log(movies[movieindex].ftitle);
-            const newDiv = document.createElement("div");
-            newDiv.innerText = "Movie: " + movies[movieindex].ftitle + "\nComments: " + movies[movieindex].commentary
-            bodyDiv.appendChild(newDiv)
-        }
-        const newTitle = document.createElement("H1");
-        newTitle.innerText = '\xa0\xa0' + "Displayed below are your movies and commentary"
-        document.body.appendChild(newTitle)
-        // Creating Body
-        var bodyDiv = document.createElement("div");
-        document.body.appendChild(bodyDiv);
-        bodyDiv.classList.add('movieBody');
-        //Displaying Movies
-        for (var i=0;i<movies.length;i+=1) {
-            console.log(movies[i].ftitle); // shows each movie displayed in console
-            const newDiv = document.createElement("div");
-            newDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
-            bodyDiv.appendChild(newDiv)
-        }
-        function sortMovies(array, key) {
-                event.preventDefault();
-                return array.sort((a, b) => {
-                  const movieA = a[key].toUpperCase();
-                  const movieB = b[key].toUpperCase();
-                  if (movieA < movieB) {
-                    return -1;
-                  }
-                 if (movieA > movieB) {
-                   return 1;
-                  }
-                  return 0;
-                });
-              }      
-              function logSort() {
-                event.preventDefault();    
-                // Sort the array of dictionaries by the 'ftitle' 
-                var sortedData = sortMovies(movies, 'ftitle');        
-                // Display the sorted data in the console
-                console.log(sortedData);  
-                const titleDiv = document.createElement("div");
-                    titleDiv.classList.add('sortTitle'); 
-                    titleDiv.innerText = "Sorted Movies Displayed Below:"
-                    document.body.appendChild(titleDiv);
-                for (var i=0;i<movies.length;i+=1) {
-                     console.log(movies[i].ftitle); // shows each movie displayed in console
-                    const sortDiv = document.createElement("div");
-                    sortDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
-                    document.body.appendChild(sortDiv)
-                 }
-                }
-        function changeStyle() {
-          event.preventDefault();
-          document.getElementById("bodyDiv").style.display = 'none';
+    function changeStyle() {
+      event.preventDefault();
+      document.getElementById("bodyDiv").style.display = 'none';
 }
-    </script>
+</script>
+<script>
+    const url = "http://kkcbal.duckdns.org/api/movies" //replace with api link
+    const create_fetch = url + '/create';
+    const read_fetch = url + '/';
+    read_movie()
+    //
+    function read_movie() {
+        // prepare fetch options
+        const read_options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        // fetch the data from API
+        fetch(read_fetch, read_options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+                if (response.status !== 200) {
+                    const errorMsg = 'Database read error: ' + response.status;
+                    console.log(errorMsg);
+                    newDiv.innerHTML = errorMsg;
+                    bodyDiv.appendChild(newDiv)
+                    return;
+                }
+            // valid response will have json data
+                response.json().then(data => {
+                    console.log(data);
+                    //data.sort(function(a, b){return a.time - b.time})
+                    //console.log(data);
+                    for (let row in data) {
+                        console.log(data[row]);
+                        add_row(data[row]);
+                    }
+                })
+            })
+        // catch fetch errors (ie ACCESS to server blocked)
+            .catch(err => {
+                console.error(err);
+                const newDiv = document.createElement("div");
+                newDiv.innerHTML = err;
+                bodyDiv.appendChild(newDiv)
+            });
+    }
+    //
+    function add_row(data) {
+        const newDiv = document.createElement("div");
+        // obtain data that is specific to the API
+        newDiv.innerHTML = "Movie: " + data.ftitle + "\nComments: " + data.commentary
+        // add HTML to container
+        bodyDiv.appendChild(newDiv)
+    }
+    //
+    function create_movie(){
+        const body = {
+            id: Date.now(),
+            ftitle: document.getElementById('ftitle').value,
+            commentary: document.getElementById("time").value
+        };
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                "content-type": "application/json",
+                'Authorization': 'Bearer my-token',
+            },
+        };
+        // URL for Create API
+        // Fetch API call to the database to create a new user
+        fetch(create_fetch, requestOptions)
+            .then(response => {
+            // trap error response from Web API
+                if (response.status !== 200) {
+                    const errorMsg = 'Database create error: ' + response.status;
+                    console.log(errorMsg);
+                    newDiv.innerHTML = errorMsg;
+                    bodyDiv.appendChild(newDiv)
+                    return;
+                }
+            // response contains valid result
+                response.json().then(data => {
+                    console.log(data);
+                    //add a table row for the new/created userid
+                    add_row(data);
+                })
+            })
+    }
+</script>
 </body>
