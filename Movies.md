@@ -60,8 +60,9 @@ custom-field input {
     // example {id:1592304983049, title: 'Avengers: Endgame', commentary: 'good action scenes.'}
     const addMovie = (ev)=>{
         ev.preventDefault();  //stops the form submitting automatically
+        create_movie()
         let movie = {
-            id: Date.now(),
+            DateID: Date.now(),
             ftitle: document.getElementById('ftitle').value,
             commentary: document.getElementById('commentary').value
         }
@@ -184,16 +185,16 @@ custom-field input {
     function add_row(data) {
         const newDiv = document.createElement("div");
         // obtain data that is specific to the API
-        newDiv.innerHTML = "Movie: " + data.ftitle + "\nComments: " + data.commentary
+        newDiv.innerHTML = "Movie: " + data.ftitle + "<br>Comments: " + data.commentary
         // add HTML to container
         bodyDiv.appendChild(newDiv)
     }
     //
     function create_movie(){
         const body = {
-            id: Date.now(),
+            DateID: Date.now(),
             ftitle: document.getElementById('ftitle').value,
-            commentary: document.getElementById("time").value
+            commentary: document.getElementById("commentary").value
         };
         const requestOptions = {
             method: 'POST',
