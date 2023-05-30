@@ -143,7 +143,7 @@ custom-field input {
         }
 </script>
 <script>
-    const url = "http://kkcbal.duckdns.org/api/movies" //replace with api link
+    const url = "https://kkcbal.duckdns.org/api/movies" //replace with api link
     const create_fetch = url + '/create';
     const read_fetch = url + '/';
     read_movie()
