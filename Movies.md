@@ -112,9 +112,21 @@ custom-field input {
               }
               return 0;
             });
-          }      
+          }
+        function removeAllChildNodes(parent) {
+            event.preventDefault();
+            while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+         }
+        }
+        function hideMovies() {
+          event.preventDefault();
+          removeAllChildNodes(bodyDiv);
+          console.log(movies);
+        }   
           function logSort() {
-            event.preventDefault();    
+            event.preventDefault();
+            hideMovies();    
             // Sort the array of dictionaries by the 'ftitle' 
             var sortedData = sortMovies(movies, 'ftitle');        
             // Display the sorted data in the console
@@ -130,17 +142,6 @@ custom-field input {
                 bodyDiv.appendChild(sortDiv)
               }
             }
-        function removeAllChildNodes(parent) {
-         event.preventDefault()
-         while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
-         }
-        }
-        function hideMovies() {
-          event.preventDefault()
-          removeAllChildNodes(bodyDiv)
-          console.log(movies)
-        }
 </script>
 <script>
     const url = "https://kkcbal.duckdns.org/api/movies" //replace with api link
