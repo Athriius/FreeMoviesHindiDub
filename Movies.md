@@ -28,6 +28,8 @@ custom-field input {
   color: white;
   border: 3px solid  #FFC133;
   padding: 12px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .movieBody {
   margin: auto;
@@ -53,7 +55,7 @@ custom-field input {
         <button id="btn">Click to Add</button>
     </custom-field>
     <button onclick="logSort()">Sort Movies By Title</button>
-    <button onclick="changeStyle()">Hide Movies</button>
+    <button onclick="hideMovies()">Hide Movies</button>
 </form>
 <script>
     let movies = [];
@@ -120,18 +122,25 @@ custom-field input {
             const titleDiv = document.createElement("div");
                 titleDiv.classList.add('sortTitle'); 
                 titleDiv.innerText = "Sorted Movies Displayed Below:"
-                document.body.appendChild(titleDiv);
+                bodyDiv.appendChild(titleDiv);
             for (var i=0;i<movies.length;i+=1) {
                   console.log(movies[i].ftitle); // shows each movie displayed in console
                 const sortDiv = document.createElement("div");
                 sortDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
-                document.body.appendChild(sortDiv)
+                bodyDiv.appendChild(sortDiv)
               }
             }
-    function changeStyle() {
-      event.preventDefault();
-      document.getElementById("bodyDiv").style.display = 'none';
-}
+        function removeAllChildNodes(parent) {
+         event.preventDefault()
+         while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+         }
+        }
+        function hideMovies() {
+          event.preventDefault()
+          removeAllChildNodes(bodyDiv)
+          console.log(movies)
+        }
 </script>
 <script>
     const url = "http://kkcbal.duckdns.org/api/movies" //replace with api link
@@ -169,6 +178,7 @@ custom-field input {
                     //console.log(data);
                     for (let row in data) {
                         console.log(data[row]);
+                        movies.push(data[row])
                         add_row(data[row]);
                     }
                 })
