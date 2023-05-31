@@ -111,17 +111,40 @@ img {
     }
     function Addmovie() {
         var movieindex = movies.length - 1;
-        console.log(movies[movieindex].ftitle);
-        var image = document.createElement('img');
-        image.src = 'images/like.png';
-        const clone = image.cloneNode(true);
+        data = movies[movieindex]
+        // build a row for each user
         const newDiv = document.createElement("div");
-        newDiv.innerText = "Movie: " + movies[movieindex].ftitle + "\nComments: " + movies[movieindex].commentary + "\nLikes: " + movies[movieindex].likes + "\nClick to Like: "
-        newDiv.appendChild(clone);
+        //
+        // td's to build out each column of data
+        const ftitle = document.createElement("p");
+        const commentary = document.createElement("p");
+        const likes = document.createElement("p")
+        const action = document.createElement("p");
+        //       
+        // add content from user data          
+        ftitle.innerHTML = "<strong>Movie Title:  </strong>" + data.ftitle; 
+        commentary.innerHTML = "<strong>Comments:  </strong>" + data.commentary; 
+        likes.innerHTML = "<strong>Likes:  </strong>" + data.likes
+        //
+        // add action for update button
+        var updateBtn = document.createElement('input');
+        updateBtn.type = "image";
+        updateBtn.className = "button";
+        updateBtn.src = "images/like.png"
+        updateBtn.style = "margin-right:16px; width: 30px; height: 30px";
+        updateBtn.onclick =  function () {
+            addLike(data.DateID);
+        };
+        action.appendChild(updateBtn);
+        //
+        // add data to row
+        newDiv.appendChild(ftitle);
+        newDiv.appendChild(commentary);
+        newDiv.appendChild(likes)
+        newDiv.appendChild(action);
+        //
+        // add row to table
         bodyDiv.appendChild(newDiv);
-        newDiv.addEventListener("click", function () {
-         addLike(movies[movieindex].DateID);
-        }); 
     }
     //Displaying Movies
     for (var i=0;i<movies.length;i+=1) {
@@ -217,10 +240,10 @@ img {
                     console.log(data);
                     //data.sort(function(a, b){return a.time - b.time})
                     //console.log(data);
-                    for (let row in data) {
-                        console.log(data[row]);
-                        movies.push(data[row])
-                        add_row(data[row]);
+                    for (let moive in data) {
+                        console.log(data[moive]);
+                        movies.push(data[moive])
+                        add_row(data[moive]);
                     }
                 })
             })
@@ -234,11 +257,39 @@ img {
     }
     //
     function add_row(data) {
+        // build a row for each user
         const newDiv = document.createElement("div");
-        // obtain data that is specific to the API
-        newDiv.innerHTML = "Movie: " + data.ftitle + "<br>Comments: " + data.commentary
-        // add HTML to container
-        bodyDiv.appendChild(newDiv)
+        //
+        // td's to build out each column of data
+        const ftitle = document.createElement("p");
+        const commentary = document.createElement("p");
+        const likes = document.createElement("p")
+        const action = document.createElement("p");
+        //       
+        // add content from user data          
+        ftitle.innerHTML = "<strong>Movie Title:  </strong>" + data.ftitle; 
+        commentary.innerHTML = "<strong>Comments:  </strong>" + data.commentary; 
+        likes.innerHTML = "<strong>Likes:  </strong>" + data.likes
+        //
+        // add action for update button
+        var updateBtn = document.createElement('input');
+        updateBtn.type = "image";
+        updateBtn.className = "button";
+        updateBtn.src = "images/like.png"
+        updateBtn.style = "margin-right:16px; width: 30px; height: 30px";
+        updateBtn.onclick =  function () {
+            addLike(data.DateID);
+        };
+        action.appendChild(updateBtn);
+        //
+        // add data to row
+        newDiv.appendChild(ftitle);
+        newDiv.appendChild(commentary);
+        newDiv.appendChild(likes)
+        newDiv.appendChild(action);
+        //
+        // add row to table
+        bodyDiv.appendChild(newDiv);
     }
     //
     function create_movie(){
