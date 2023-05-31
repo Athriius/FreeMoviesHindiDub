@@ -66,7 +66,8 @@ custom-field input {
         let movie = {
             DateID: Date.now(),
             ftitle: document.getElementById('ftitle').value,
-            commentary: document.getElementById('commentary').value
+            commentary: document.getElementById('commentary').value,
+            likes: 0
         }
         movies.push(movie);
         document.forms[0].reset(); // to clear the form for the next entries
@@ -205,7 +206,8 @@ custom-field input {
         const body = {
             DateID: Date.now(),
             ftitle: document.getElementById('ftitle').value,
-            commentary: document.getElementById("commentary").value
+            commentary: document.getElementById("commentary").value,
+            likes: 0
         };
         const requestOptions = {
             method: 'POST',
@@ -224,6 +226,7 @@ custom-field input {
                 if (response.status !== 200) {
                     const errorMsg = 'Database create error: ' + response.status;
                     console.log(errorMsg);
+                    const newDiv = document.createElement("div")
                     newDiv.innerHTML = errorMsg;
                     bodyDiv.appendChild(newDiv)
                     return;
