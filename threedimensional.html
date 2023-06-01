@@ -43,17 +43,6 @@
 
         controls.update();
 
-        function animate() {
-
-            requestAnimationFrame( animate );
-        
-            // required if controls.enableDamping or controls.autoRotate are set to true
-            controls.update();
-        
-            renderer.render( scene, camera );
-        
-        }
-
         const scene = new THREE.Scene();
 
         {
