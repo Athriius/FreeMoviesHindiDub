@@ -91,4 +91,50 @@
                 })
             })
     }
+    data.forEach(user => {
+        // build a row for each user
+        const newDiv = document.createElement("div");
+    
+        // td's to build out each column of data
+        const ftitle = document.createElement("p");
+        const commentary = document.createElement("p");
+        const likes = document.createElement("p")
+        const action = document.createElement("p");
+               
+        // add content from user data          
+        ftitle.innerHTML = user._ftitle; 
+        commentary.innerHTML = user._commentary; 
+        likes.innerHTML = user._likes
+    
+        // add action for update button
+        var updateBtn = document.createElement('input');
+        updateBtn.type = "button";
+        updateBtn.className = "button";
+        updateBtn.value = "Update";
+        updateBtn.style = "margin-right:16px";
+        updateBtn.onclick = function () {
+          alert("Update: " + user._DateID);
+        };
+        action.appendChild(updateBtn);
+    
+        // add action for delete button
+        var deleteBtn = document.createElement('input');
+        deleteBtn.type = "button";
+        deleteBtn.className = "button";
+        deleteBtn.value = "Delete";
+        deleteBtn.style = "margin-right:16px"
+        deleteBtn.onclick = function () {
+          alert("Delete: " + user._DateID);
+        };
+        action.appendChild(deleteBtn);  
+    
+        // add data to row
+        newDiv.appendChild(ftitle);
+        newDiv.appendChild(commentary);
+        newDiv.appendChild(likes)
+        newDiv.appendChild(action);
+    
+        // add row to table
+        bodyDiv.appendChild(newDiv);
+    });
 </script>

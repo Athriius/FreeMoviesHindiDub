@@ -53,10 +53,8 @@
         const boxDepth = 1;
         const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
-        function makeInstance(geometry, color, x) {
-            const material = new THREE.MeshPhongMaterial({color});
-           
-            const cube = new THREE.Mesh(geometry, material);
+        function makeInstance(geometry, mats, x) {
+            const cube = new THREE.Mesh(geometry, mats);
             scene.add(cube);
            
             cube.position.x = x;
@@ -64,10 +62,35 @@
             return cube;
         }
 
+        const materialsX = [
+            new THREE.MeshBasicMaterial({map: loader.load('/images/drip1.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/drip2.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/nigero.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/asher-forehead.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/evan-side.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/the-carnival.jpg')}),
+        ]
+        const materialsY = [
+            new THREE.MeshBasicMaterial({map: loader.load('/images/asher-concerned.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/evan-dawg.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/my-hero.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/o.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/adhd.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/Monkey_Bomb_Nuked_model_BOII.png')}),
+        ]
+        const materialsZ = [
+            new THREE.MeshBasicMaterial({map: loader.load('/images/Beneath-the-Toxic-Jungle.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/CALL-ME-IF-YOU-GET-LOST-The-Estate-Sale.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/The-Search.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/False-Swipe.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/le-doctors.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('/images/dooxx.jpg')}),
+        ]
+
         const cubes = [
-            makeInstance(geometry, 0x44aa88,  0),
-            makeInstance(geometry, 0x8844aa, -2),
-            makeInstance(geometry, 0xaa8844,  2),
+            makeInstance(geometry, materialsX,  0),
+            makeInstance(geometry, materialsY, -2),
+            makeInstance(geometry, materialsZ,  2),
         ];
 
         const loader = new THREE.TextureLoader(); //loads images (for textures)
