@@ -62,38 +62,38 @@
             return cube;
         }
 
+        const loader = new THREE.TextureLoader(); //loads images (for textures)
+
         const materialsX = [
-            new THREE.MeshBasicMaterial({map: loader.load('/images/drip1.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/drip2.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/nigero.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/asher-forehead.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/evan-side.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/the-carnival.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/drip1.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/drip2.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/nigero.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/asher-forehead.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/evan-side.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/the-carnival.jpg')}),
         ]
         const materialsY = [
-            new THREE.MeshBasicMaterial({map: loader.load('/images/asher-concerned.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/evan-dawg.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/my-hero.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/o.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/adhd.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/Monkey_Bomb_Nuked_model_BOII.png')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/asher-concerned.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/evan-dawg.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/my-hero.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/o.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/adhd.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/Monkey_Bomb_Nuked_model_BOII.png')}),
         ]
         const materialsZ = [
-            new THREE.MeshBasicMaterial({map: loader.load('/images/Beneath-the-Toxic-Jungle.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/CALL-ME-IF-YOU-GET-LOST-The-Estate-Sale.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/The-Search.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/False-Swipe.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/le-doctors.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('/images/dooxx.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/Beneath-the-Toxic-Jungle.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/CALL-ME-IF-YOU-GET-LOST-The-Estate-Sale.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/The-Search.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/False-Swipe.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/le-doctors.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/dooxx.jpg')}),
         ]
 
         const cubes = [
             makeInstance(geometry, materialsX,  0),
-            makeInstance(geometry, materialsY, -2),
-            makeInstance(geometry, materialsZ,  2),
+            makeInstance(geometry, materialsY, -1.5),
+            makeInstance(geometry, materialsZ,  1.5),
         ];
-
-        const loader = new THREE.TextureLoader(); //loads images (for textures)
 
         //const material = new THREE.MeshPhongMaterial({color: 0x44aa88}); //map: loader.load("https://kkcbal.github.io/madeacopy/images/penut.jpg")
 
