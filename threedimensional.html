@@ -41,6 +41,8 @@
 
         camera.position.z = 2;
 
+        controls.target.set(0, 0, 0)
+        controls.enabled = false
         controls.update();
 
         const scene = new THREE.Scene();
@@ -100,11 +102,24 @@
             makeInstance(geometry, materialsZ,  1.5),
         ];
 
+        controls.autoRotate = true
+
         //const material = new THREE.MeshPhongMaterial({color: 0x44aa88}); //map: loader.load("https://kkcbal.github.io/madeacopy/images/penut.jpg")
 
         //const cube = new THREE.Mesh(geometry, material);
 
         //scene.add(cube);
+
+        function animate() {
+
+            requestAnimationFrame( animate );
+        
+            // required if controls.enableDamping or controls.autoRotate are set to true
+            controls.update();
+        
+            renderer.render( scene, camera );
+        
+        }
 
         function render(time) {
             time *= 0.001;  // convert time to seconds
@@ -142,6 +157,7 @@
             return needResize;
         }
         requestAnimationFrame(render);
+        animate()
     }
     main()
 </script>
