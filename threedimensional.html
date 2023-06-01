@@ -86,7 +86,7 @@
             new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/The-Search.jpg')}),
             new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/False-Swipe.jpg')}),
             new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/le-doctors.jpg')}),
-            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/dooxx.jpg')}),
+            new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/dooxx.png')}),
         ]
 
         const cubes = [
@@ -115,7 +115,7 @@
             camera.updateProjectionMatrix();
 
             cubes.forEach((cube, ndx) => {
-                const speed = 1 + ndx * .1;
+                const speed = .3 + ndx * .1;
                 const rot = time * speed;
                 cube.rotation.x = rot;
                 cube.rotation.y = rot;
