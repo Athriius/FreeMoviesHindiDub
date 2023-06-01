@@ -265,7 +265,11 @@ img {
                 if (response.status !== 200) {
                     const errorMsg = 'Database create error: ' + response.status;
                     console.log(errorMsg);
+<<<<<<< HEAD
                     const newDiv = document.createElement("div");
+=======
+                    const newDiv = document.createElement("div")
+>>>>>>> f691f475c31cb2778764cbfec28ee02ceca17568
                     newDiv.innerHTML = errorMsg;
                     bodyDiv.appendChild(newDiv)
                     return;
