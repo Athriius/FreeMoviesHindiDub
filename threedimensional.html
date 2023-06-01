@@ -25,6 +25,7 @@
 </body>
 <script type="module">
     import * as THREE from 'three';
+    import { OrbitControls } from '/addons/OrbitControls.js';
 
     function main() {
         const canvas = document.querySelector('#c');
@@ -36,7 +37,22 @@
         const far = 5;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
+        const controls = new OrbitControls( camera, renderer.domElement );
+
         camera.position.z = 2;
+
+        controls.update();
+
+        function animate() {
+
+            requestAnimationFrame( animate );
+        
+            // required if controls.enableDamping or controls.autoRotate are set to true
+            controls.update();
+        
+            renderer.render( scene, camera );
+        
+        }
 
         const scene = new THREE.Scene();
 
