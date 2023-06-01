@@ -39,7 +39,7 @@
 
         const controls = new OrbitControls( camera, renderer.domElement );
 
-        camera.position.z = 2;
+        camera.position.z = 3;
 
         controls.target.set(0, 0, 0)
         controls.enabled = false
@@ -103,6 +103,7 @@
         ];
 
         controls.autoRotate = true
+        controls.autoRotateSpeed = 1.2
 
         //const material = new THREE.MeshPhongMaterial({color: 0x44aa88}); //map: loader.load("https://kkcbal.github.io/madeacopy/images/penut.jpg")
 
