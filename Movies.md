@@ -39,6 +39,10 @@ custom-field input {
   width: 1000px;
   background: #f2f2f2;
 }
+img {
+  width: 30px;
+  height: 30px;
+}
 </style>
 <form>
     <custom-field class="formBox">
@@ -66,7 +70,8 @@ custom-field input {
         let movie = {
             DateID: Date.now(),
             ftitle: document.getElementById('ftitle').value,
-            commentary: document.getElementById('commentary').value
+            commentary: document.getElementById('commentary').value,
+            likes: 0
         }
         movies.push(movie);
         document.forms[0].reset(); // to clear the form for the next entries
@@ -78,13 +83,7 @@ custom-field input {
     document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById('btn').addEventListener('click', addMovie);
     });
-    function Addmovie() {
-        var movieindex = movies.length - 1;
-        console.log(movies[movieindex].ftitle);
-        const newDiv = document.createElement("div");
-        newDiv.innerText = "Movie: " + movies[movieindex].ftitle + "\nComments: " + movies[movieindex].commentary
-        bodyDiv.appendChild(newDiv)
-    }
+    //Title
     const newTitle = document.createElement("H1");
     newTitle.innerText = '\xa0\xa0' + "Displayed below are your movies and commentary"
     document.body.appendChild(newTitle)
@@ -92,12 +91,51 @@ custom-field input {
     var bodyDiv = document.createElement("div");
     document.body.appendChild(bodyDiv);
     bodyDiv.classList.add('movieBody');
+    //Hide Movies
+    function hideMovies() {
+          event.preventDefault();
+          removeAllChildNodes(bodyDiv);
+          console.log(movies);
+        }  
+    // find
+    function addLike(value) {
+        for (var i=0;i<movies.length;i+=1) {
+            if (movies[i].DateID === value) {
+                movies[i].likes += 1
+                console.log("Likes: " + movies[i].likes)
+            }
+            else {
+                console.log("no")
+            }
+        }
+    }
+    function Addmovie() {
+        var movieindex = movies.length - 1;
+        console.log(movies[movieindex].ftitle);
+        var image = document.createElement('img');
+        image.src = 'images/like.png';
+        const clone = image.cloneNode(true);
+        const newDiv = document.createElement("div");
+        newDiv.innerText = "Movie: " + movies[movieindex].ftitle + "\nComments: " + movies[movieindex].commentary + "\nLikes: " + movies[movieindex].likes + "\nClick to Like: "
+        newDiv.appendChild(clone);
+        bodyDiv.appendChild(newDiv);
+        newDiv.addEventListener("click", function () {
+         addLike(movies[movieindex].DateID);
+        }); 
+    }
     //Displaying Movies
     for (var i=0;i<movies.length;i+=1) {
         console.log(movies[i].ftitle); // shows each movie displayed in console
+        var image = document.createElement('img');
+        image.src = 'images/like.png';
+        const clone = image.cloneNode(true);
         const newDiv = document.createElement("div");
-        newDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
-        bodyDiv.appendChild(newDiv)
+        newDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary + "\n Likes: " + movies[i].likes + "\nClick to Like: "
+        newDiv.appendChild(clone);
+        bodyDiv.appendChild(newDiv);
+        newDiv.addEventListener("click", function () {
+         addLike(movies[i].DateID);
+        }); 
     }
     function sortMovies(array, key) {
             event.preventDefault();
@@ -118,12 +156,7 @@ custom-field input {
             while (parent.firstChild) {
             parent.removeChild(parent.firstChild);
          }
-        }
-        function hideMovies() {
-          event.preventDefault();
-          removeAllChildNodes(bodyDiv);
-          console.log(movies);
-        }   
+        } 
           function logSort() {
             event.preventDefault();
             hideMovies();    
@@ -137,9 +170,16 @@ custom-field input {
                 bodyDiv.appendChild(titleDiv);
             for (var i=0;i<movies.length;i+=1) {
                   console.log(movies[i].ftitle); // shows each movie displayed in console
+                var image = document.createElement('img');
+                image.src = 'images/like.png';
+                const clone = image.cloneNode(true);
                 const sortDiv = document.createElement("div");
-                sortDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary
+                sortDiv.innerText = "Movie: " + movies[i].ftitle + "\nComments: " + movies[i].commentary + "\n Likes: " + movies[i].likes + "\nClick to Like: "
+                sortDiv.appendChild(clone)
                 bodyDiv.appendChild(sortDiv)
+                sortDiv.addEventListener("click", function () {
+                addLike(movies[i].DateID);
+                }); 
               }
             }
 </script>
@@ -205,7 +245,8 @@ custom-field input {
         const body = {
             DateID: Date.now(),
             ftitle: document.getElementById('ftitle').value,
-            commentary: document.getElementById("commentary").value
+            commentary: document.getElementById("commentary").value,
+            likes: 0
         };
         const requestOptions = {
             method: 'POST',
@@ -224,6 +265,7 @@ custom-field input {
                 if (response.status !== 200) {
                     const errorMsg = 'Database create error: ' + response.status;
                     console.log(errorMsg);
+                    const newDiv = document.createElement("div");
                     newDiv.innerHTML = errorMsg;
                     bodyDiv.appendChild(newDiv)
                     return;
