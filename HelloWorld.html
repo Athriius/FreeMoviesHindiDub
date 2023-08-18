@@ -42,6 +42,12 @@
         camera.position.z = 3;
 
         controls.target.set(0, 0, 0)
+        controls.keys = {
+            LEFT: 'ArrowLeft', //left arrow
+            UP: 'ArrowUp', // up arrow
+            RIGHT: 'ArrowRight', // right arrow
+            BOTTOM: 'ArrowDown' // down arrow
+        }
         controls.update();
 
         const scene = new THREE.Scene();
@@ -59,11 +65,13 @@
         const boxDepth = 1;
         const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
-        function makeInstance(geometry, mats, x) {
+        function makeInstance(geometry, mats, x, z, y) {
             const cube = new THREE.Mesh(geometry, mats);
             scene.add(cube);
            
             cube.position.x = x;
+            cube.position.z = z;
+            cube.position.y = y;
            
             return cube;
         }
@@ -94,11 +102,13 @@
             new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/le-doctors.jpg')}),
             new THREE.MeshBasicMaterial({map: loader.load('https://athriius.github.io/FreeMoviesHindiDub/images/dooxx.png')}),
         ]
+        const materialW = new THREE.MeshPhongMaterial({color: 0xA8324C})
 
         const cubes = [
-            makeInstance(geometry, materialsX,  0),
-            makeInstance(geometry, materialsY, -1.5),
-            makeInstance(geometry, materialsZ,  1.5),
+            makeInstance(geometry, materialsX,  0, 0.7, 0),
+            makeInstance(geometry, materialsY, -0.9, -0.7, 0),
+            makeInstance(geometry, materialsZ,  0.9, -0.7, 0),
+            makeInstance(geometry, materialW, 0, 0, 1)
         ];
 
         controls.autoRotate = true
