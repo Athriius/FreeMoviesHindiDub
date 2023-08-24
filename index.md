@@ -8,3 +8,6 @@
 
 * View the reasons behind different movie opinions.
 
+<video width="500" height="500" controls>
+    <source src="family-guy.mp4" type="video/mp4">
+</video>
