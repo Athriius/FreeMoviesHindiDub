@@ -9,8 +9,6 @@
 * View the reasons behind different movie opinions.
 
 <video width="500" height="500" controls>
-    <source src="family-guy.mp4" type="video/mp4">
-    <source src="family-guy.ogg" type="video/mp4">
-    <source src="family-guy.webm" type="video/webm">
+    <source src="/FreeMoviesHindiDub/images/family-guy.mp4" type="video/mp4">
     vdieo donet work
 </video>
