@@ -7,8 +7,3 @@
 * Like and dislike posts in order to help determine which movies are best
 
 * View the reasons behind different movie opinions.
-
-<video width="500" height="500" controls>
-    <source src="/FreeMoviesHindiDub/images/family-guy.mp4" type="video/mp4">
-    vdieo donet work
-</video>
